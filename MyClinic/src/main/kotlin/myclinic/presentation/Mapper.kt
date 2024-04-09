@@ -1,12 +1,36 @@
 package myclinic.presentation
 
-import myclinic.data.ClientDAO
-import myclinic.data.MedicalHistoryDAO
+import myclinic.data.*
 
-fun clientDAOMapper(client: AddClientDTO): ClientDAO {
+fun clientDTOMapper(client: ClientDTO): ClientDAO {
 
-    val mh = client.medicalHistoryDTO
+    val mhDTO = client.medicalHistoryDTO
     val hh = client.householdDTO
 
-    return ClientDAO(client.username, client.name, client.email, client.password, client.phone, client.nif,)
+
+
+    val mhDAO = MedicalHistoryDAO(mhDTO.id, null, null, mutableListOf(), mutableListOf(), mutableListOf())
+    val hhDAO = HouseholdDAO(hh.id, mutableListOf())
+
+    val clientDAO = ClientDAO(client.username, client.name, client.email, client.password, client.phone, client.nif, mhDAO, hhDAO)
+
+    clientDAO.medicalHistory.client = clientDAO
+    clientDAO.household.clients.add(clientDAO)
+
+    return clientDAO
 }
+
+fun clientDAOMapper(client: ClientDAO): ClientShortDTO =
+    ClientShortDTO(client.username, client.email, client.phone)
+
+fun appointmentDAOMapperToSchedule(appointment: AppointmentDAO): ScheduleDTO =
+    ScheduleDTO(appointment.id,
+        ClientShortDTO(appointment.client.username, appointment.client.email, appointment.client.phone),
+        DoctorShortDTO(appointment.doctor.username, appointment.doctor.email, appointment.doctor.phone),
+        appointment.state, appointment.date, appointment.type)
+
+fun examDAOMapperToSchedule(exam: ExamDAO): ScheduleDTO =
+    ScheduleDTO(exam.id,
+        ClientShortDTO(exam.client.username, exam.client.email, exam.client.phone),
+        DoctorShortDTO(exam.doctor.username, exam.doctor.email, exam.doctor.phone),
+        exam.state, exam.date, exam.type)

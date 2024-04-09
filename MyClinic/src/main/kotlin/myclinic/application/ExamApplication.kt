@@ -2,9 +2,12 @@ package myclinic.application
 
 import myclinic.data.ExamDAO
 import myclinic.data.ExamRepository
+import org.springframework.stereotype.Service
+import java.util.Optional
 
+@Service
 class ExamApplication(
-    val exams: ExamRepository
+    private val exams: ExamRepository
 ) {
 
     fun addExam(exam: ExamDAO) {
@@ -13,5 +16,8 @@ class ExamApplication(
 
     fun getAllClientExams(username: String): Iterable<ExamDAO> =
         exams.findAllByClientUsername(username)
+
+    fun getClientExam(username: String, id: Long): Optional<ExamDAO> =
+        exams.findByClientUsernameAndId(username, id)
 
 }

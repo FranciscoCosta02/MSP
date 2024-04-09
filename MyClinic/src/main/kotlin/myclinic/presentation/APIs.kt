@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*
 interface DoctorsAPI {
 
     @PostMapping("doctors")
-    fun addDoctor(@RequestBody doctor: AddDoctorDTO)
+    fun addDoctor(@RequestBody doctor: DoctorDTO)
 
 }
 
@@ -20,7 +20,15 @@ interface DoctorsAPI {
 interface ClientAPI {
 
     @PostMapping("clients")
-    fun addClient(@RequestBody client: AddClientDTO)
+    @Operation(summary = "Adds a client")
+    @ApiResponses(
+        value = [
+            ApiResponse(responseCode = "200", description = "Client added successfully"),
+            ApiResponse(responseCode = "500", description = "Error in the system")
+        ]
+    )
+    fun addClient(@RequestBody client: ClientDTO)
+
 
     @GetMapping("clients/{username}")
     fun getClient(@PathVariable username: String): ClientShortDTO
@@ -28,6 +36,7 @@ interface ClientAPI {
 }
 
 @RequestMapping("/api")
+@Tag(name = "Schedule", description = "Schedule API")
 interface ScheduleAPI {
 
     @GetMapping("clients/{username}/schedule")
@@ -39,7 +48,7 @@ interface ScheduleAPI {
     @PostMapping("clients/{username}/exams")
     fun addExam(@PathVariable username: String, @RequestBody exam: AddExamDTO)
 
-    @PutMapping("clients/{username}/schedule/{id}")
-    fun checkIn(@PathVariable username: String, @PathVariable id: Long)
+    @PutMapping("clients/{username}/schedule/{type}/{id}")
+    fun checkIn(@PathVariable username: String, @PathVariable type: String, @PathVariable id: Long)
 
 }

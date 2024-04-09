@@ -2,22 +2,21 @@ package myclinic.presentation.controller
 
 import myclinic.application.ClientApplication
 import myclinic.data.ClientDAO
-import myclinic.presentation.AddClientDTO
-import myclinic.presentation.ClientAPI
-import myclinic.presentation.ClientShortDTO
+import myclinic.presentation.*
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class ClientController(
-    val clientApp: ClientApplication
+    private val clientApp: ClientApplication
 ) : ClientAPI {
 
-    override fun addClient(client: AddClientDTO) {
-        TODO("Not yet implemented")
+    override fun addClient(client: ClientDTO) {
+        clientApp.addClient(clientDTOMapper(client))
     }
 
     override fun getClient(username: String): ClientShortDTO {
-        TODO("Not yet implemented")
+        val clientDAO = clientApp.getClient(username).orElseThrow{NotFoundException(Constants.CLIENT_NOT_FOUND.message)}
+        return clientDAOMapper(clientDAO)
     }
 
 
