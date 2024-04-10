@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+.homepage {
+    display: flex;
+    font-family: "Nunito", sans-serif;
+}
+
+.left {
+    background-color: #ffffff;
+    width: 16%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.right {
+    background-color: #F1F1F1C4;
+    width: 84%;
+    padding-left: 20px;
+    padding-right: 40px;
+    padding-bottom: 20px;
+}
+
+.myclinic-text {
+    font-weight: bold;
+    font-size: 2em;
+    color: #0f3c85;
+    display: flex;
+    align-items: center;
+}
+
+.hello-text {
+    font-size: 2em;
+    color: rgba(24, 24, 24, 0.87);
+    display: flex;
+    align-items: center;
+}
+
+.card-profile {
+    width: 80%;
+    height: 60%;
+    background: rgb(239, 239, 239);
+    border-radius: 12px;
+    box-shadow: 30px 30px 30px rgba(231, 231, 231, 0.22);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    transition-duration: .5s;
+}
+
+.textContainer {
+    width: 100%;
+    padding: 10%;
+}
+
+.name {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #1f1f1f;
+    letter-spacing: 0.5px;
+}
+
+.titles {
+    font-size: 1.6em;
+    font-weight: bold;
+    color: #1f1f1f;
+}
+
+.profile {
+    font-size: 1em;
+    color: rgba(37, 37, 37, 0.71);
+    letter-spacing: 0.2px;
+    background-color: rgba(10, 43, 96, 0.53);
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.profile:hover {
+    background-color: #2c528a;
+    color: #232324;
+}
+
+.card-profile:hover {
+    background-color: rgb(208, 208, 208);
+    transition-duration: .5s;
+}
+
