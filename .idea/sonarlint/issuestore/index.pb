@@ -85,3 +85,25 @@ Y
 Q.idea/sonarlint/securityhotspotstore/9/5/955177a24d2bbdfbbbe63987df8c9ab9ff343147,1\f\1f9d8bb93597fe23527a28314845a8b6966349d3
 [
 +node_modules/@types/prop-types/package.json,1\6\160c1f378d6091a1fe9025b08efa288d387a210c
+M
+myclinic-client/src/index.css,d\6\d6fe627c0958f0b09a0a4d5dffbdb325bc5860a7
+R
+"myclinic-client/src/store/hooks.ts,9\7\973733b729850106e8ed18126db0baa5077bb15f
+R
+"myclinic-client/src/store/index.ts,8\5\85cf8b018c14da8c8fe6824adf47bec666cd957f
+]
+-MyClinic/src/main/kotlin/myclinic/data/DAO.kt,1\e\1e96d3b0a9a0fdd5a10913e90f786d552c8f8d56
+Q
+!myclinic-client/src/store/user.ts,9\2\92acfb09633389c263ca6ff0e3a5476fdf0a8ce7
+Y
+)myclinic-client/src/store/appointments.ts,a\7\a7252f951d14127de79788c71f0f0e3165163c94
+e
+5MyClinic/src/main/kotlin/myclinic/presentation/DTO.kt,e\e\ee0566d61f0d1cc4035f49af42d5410730672fdb
+_
+/myclinic-client/src/components/layout/index.tsx,5\4\54c2e7f58a7972e13cea5facf3dd0340841130af
+]
+-myclinic-client/src/components/util/index.tsx,7\e\7e688ed18ff4f8cd2341eb9348d42590e1eb5554
+d
+4myclinic-client/src/components/homepage/homepage.css,a\6\a618e362b50861030a32c2c4893b94d2b33b317b
+P
+ myclinic-client/src/homepage.css,4\7\4760ce8a00683156c074b52aaf359276bdbc3164

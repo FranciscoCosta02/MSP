@@ -1,26 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Header, Footer } from './components/layout'
+import { Navigation, Login } from './components/util';
+import { Homepage } from './components/homepage';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStethoscope, faLaptopMedical, faFileWaveform, faHospital } from '@fortawesome/free-solid-svg-icons';
 import './App.css';
+import './components/homepage/homepage.css';
+import {Provider} from "react-redux";
+import {store} from "./store";
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function HomepageApp() {
+
+    //npm install --save @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/react-fontawesome
+
+    return (
+        <div><Homepage/></div>
+    );
+
 }
 
-export default App;
+const RdxApp = () => (
+    <Provider store={store}>
+        <Router>
+            <Routes>
+                <Route path='/' element={<HomepageApp />} />
+            </Routes>
+        </Router>
+    </Provider>
+);
+
+
+export default RdxApp;
