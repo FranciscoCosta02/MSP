@@ -16,7 +16,7 @@ class Init (val clients: ClientRepository, val doctors: DoctorRepository,
         /**
          * Client
          */
-        val medicalHistoryClient = MedicalHistoryDAO(0, null, null,
+        val medicalHistoryClient = MedicalHistoryDAO(0, null, mutableListOf(),
             mutableListOf(), mutableListOf(), mutableListOf())
         medicalHistories.save(medicalHistoryClient)
 
@@ -38,22 +38,10 @@ class Init (val clients: ClientRepository, val doctors: DoctorRepository,
         /**
          * Doctor
          */
-        val medicalHistoryDoctor = MedicalHistoryDAO(0, null, null,
-            mutableListOf(), mutableListOf(), mutableListOf())
-        medicalHistories.save(medicalHistoryDoctor)
 
         val doctor = DoctorDAO("kiko", "Francisco Costa", "kiko@gmail.com", "pass",
-            "921394024", medicalHistoryDoctor)
+            "921394024", mutableListOf())
         doctors.save(doctor)
-
-        medicalHistoryDoctor.doctor = doctor
-        medicalHistories.save(medicalHistoryDoctor)
-
-        doctors.save(doctor)
-
-
-
-
 
     }
 

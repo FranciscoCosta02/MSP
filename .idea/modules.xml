@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/MSP.iml" filepath="$PROJECT_DIR$/.idea/MSP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sst-app-main/NOVA-SST.iml" filepath="$PROJECT_DIR$/sst-app-main/NOVA-SST.iml" />
     </modules>
   </component>
 </project>

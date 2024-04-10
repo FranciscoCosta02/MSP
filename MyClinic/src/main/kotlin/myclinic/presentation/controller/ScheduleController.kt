@@ -17,6 +17,7 @@ class ScheduleController(
     private val appointmentApp: AppointmentApplication,
     private val examApp: ExamApplication
 ) : ScheduleAPI {
+
     override fun getClientSchedule(username: String): List<ScheduleDTO> {
         val medicalHistory = medicalHistoryApp.getClientMedicalHistory(username)
             .orElseThrow { NotFoundException(Constants.CLIENT_NOT_FOUND.message) }

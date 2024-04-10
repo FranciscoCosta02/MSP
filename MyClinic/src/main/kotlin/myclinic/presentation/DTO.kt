@@ -77,12 +77,12 @@ data class HouseholdDTO(val id: Long, val clients: List<ClientShortDTO>)
  * Medical History
  */
 @Schema(name = "Medical History", description = "Original version of medical history")
-data class MedicalHistoryDTO(val id: Long, var clientUsername: String?, var doctorUsername: String?,
+data class MedicalHistoryDTO(val id: Long, val clientUsername: String, val doctorUsernames: List<String>,
                              val appointments: List<AppointmentDTO>, val exams: List<ExamDTO>,
                              val prescriptions: List<PrescriptionDTO>)
 
 @Schema(name = "Medical History to add", description = "Medical history to register")
-data class AddMedicalHistoryDTO(var clientUsername: String?, var doctorUsername: String?,
+data class AddMedicalHistoryDTO(val clientUsername: String, val doctorUsernames: List<String>,
                              val appointments: List<AppointmentDTO>, val exams: List<ExamDTO>,
                              val prescriptions: List<PrescriptionDTO>)
 

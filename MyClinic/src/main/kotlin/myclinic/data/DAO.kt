@@ -4,21 +4,24 @@ import jakarta.persistence.*
 import java.time.LocalDate
 
 @Entity
-data class ClientDAO(@Id val username: String, val name: String, val email: String, val password: String, val phone: String,
-                     val nif: String, @OneToOne val medicalHistory: MedicalHistoryDAO, @ManyToOne val household: HouseholdDAO)
+data class ClientDAO(@Id val username: String, val name: String, val email: String, val password: String,
+                     val phone: String, val nif: String, @OneToOne val medicalHistory: MedicalHistoryDAO,
+                     @ManyToOne val household: HouseholdDAO)
 
 @Entity
-data class HouseholdDAO(@Id @GeneratedValue val id: Long, @OneToMany(mappedBy = "household") val clients: MutableList<ClientDAO>)
+data class HouseholdDAO(@Id @GeneratedValue val id: Long,
+                        @OneToMany(mappedBy = "household") val clients: MutableList<ClientDAO>)
 
 @Entity
-data class MedicalHistoryDAO(@Id @GeneratedValue val id: Long, @OneToOne var client: ClientDAO?, @OneToOne var doctor: DoctorDAO?,
-                             @OneToMany(mappedBy = "medicalHistory") val appointments: MutableList<AppointmentDAO>,
-                             @OneToMany(mappedBy = "medicalHistory") val exams: MutableList<ExamDAO>,
-                             @OneToMany(mappedBy = "medicalHistory") val prescriptions: MutableList<PrescriptionDAO>)
+data class MedicalHistoryDAO(@Id @GeneratedValue val id: Long, @OneToOne var client: ClientDAO?,
+                             @ManyToMany val doctors: MutableList<DoctorDAO>,
+                             @ManyToMany val appointments: MutableList<AppointmentDAO>,
+                             @ManyToMany val exams: MutableList<ExamDAO>,
+                             @ManyToMany val prescriptions: MutableList<PrescriptionDAO>)
 
 @Entity
-data class DoctorDAO(@Id val username: String, val name: String, val email: String, val password: String, val phone: String,
-                     @OneToOne val medicalHistory: MedicalHistoryDAO)
+data class DoctorDAO(@Id val username: String, val name: String, val email: String, val password: String,
+                     val phone: String, @ManyToMany val medicalHistories: MutableList<MedicalHistoryDAO>)
 
 @Entity
 data class AppointmentDAO(@Id @GeneratedValue val id: Long, val date: LocalDate, val regime: AppointmentRegime,

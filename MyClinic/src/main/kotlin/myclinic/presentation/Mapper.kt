@@ -7,9 +7,7 @@ fun clientDTOMapper(client: ClientDTO): ClientDAO {
     val mhDTO = client.medicalHistoryDTO
     val hh = client.householdDTO
 
-
-
-    val mhDAO = MedicalHistoryDAO(mhDTO.id, null, null, mutableListOf(), mutableListOf(), mutableListOf())
+    val mhDAO = MedicalHistoryDAO(mhDTO.id, null, mutableListOf(), mutableListOf(), mutableListOf(), mutableListOf())
     val hhDAO = HouseholdDAO(hh.id, mutableListOf())
 
     val clientDAO = ClientDAO(client.username, client.name, client.email, client.password, client.phone, client.nif, mhDAO, hhDAO)
