@@ -35,40 +35,39 @@ class ScheduleController(
     override fun addAppointment(username: String, appointment: AddAppointmentDTO) {
         val medicalHistoryClient = medicalHistoryApp.getClientMedicalHistory(username)
             .orElseThrow { NotFoundException(Constants.CLIENT_NOT_FOUND.message) }
-        val medicalHistoryDoctor = medicalHistoryApp.getClientMedicalHistory(appointment.doctorUsername)
-            .orElseThrow{ NotFoundException(Constants.DOCTOR_NOT_FOUND.message) }
 
         val client = clientsApp.getClient(appointment.clientUsername).get()
-        val doctor = doctorsApp.getDoctor(appointment.doctorUsername).get()
+        doctorsApp.getDoctor(appointment.doctorUsername)
+            .orElseThrow { NotFoundException(Constants.DOCTOR_NOT_FOUND.message) }
 
         val appointmentDAO = AppointmentDAO(0, appointment.date, appointment.regime, appointment.type,
-            ScheduleState.SCHEDULED, client, doctor, medicalHistoryClient, medicalHistoryDoctor)
+            ScheduleState.SCHEDULED, client, appointment.doctorUsername, medicalHistoryClient)
         medicalHistoryClient.appointments.add(appointmentDAO)
-        medicalHistoryDoctor.appointments.add(appointmentDAO)
     }
 
     override fun addExam(username: String, exam: AddExamDTO) {
         val medicalHistoryClient = medicalHistoryApp.getClientMedicalHistory(username)
             .orElseThrow { NotFoundException(Constants.CLIENT_NOT_FOUND.message) }
-        val medicalHistoryDoctor = medicalHistoryApp.getClientMedicalHistory(exam.doctorUsername)
-            .orElseThrow{ NotFoundException(Constants.DOCTOR_NOT_FOUND.message) }
 
         val client = clientsApp.getClient(exam.clientUsername).get()
-        val doctor = doctorsApp.getDoctor(exam.doctorUsername).get()
+        doctorsApp.getDoctor(exam.doctorUsername)
+            .orElseThrow { NotFoundException(Constants.DOCTOR_NOT_FOUND.message) }
 
         val examDAO = ExamDAO(0, exam.date, exam.equipment, exam.type, ScheduleState.SCHEDULED,
-            client, doctor, medicalHistoryClient, medicalHistoryDoctor)
+            client, exam.doctorUsername, medicalHistoryClient)
         medicalHistoryClient.exams.add(examDAO)
-        medicalHistoryDoctor.exams.add(examDAO)
     }
 
     override fun checkIn(username: String, type: String, id: Long) {
 
         clientsApp.getClient(username).orElseThrow { NotFoundException(Constants.CLIENT_NOT_FOUND.message) }
-        if (type == "appointment")
+        if (type == "appointment") {
             appointmentApp.getClientAppointment(username, id)
                 .orElseThrow { NotFoundException(Constants.APPOINTMENT_NOT_FOUND.message) }
                 .state = ScheduleState.READY
+
+            val appointment = appointmentApp.getClientAppointment(username, id).get()
+        }
         else if (type == "exam")
             examApp.getClientExam(username, id)
                 .orElseThrow{ NotFoundException(Constants.EXAM_NOT_FOUND.message) }

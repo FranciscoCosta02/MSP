@@ -20,14 +20,8 @@ interface DoctorsAPI {
 interface ClientAPI {
 
     @PostMapping("clients")
-    @Operation(summary = "Adds a client")
-    @ApiResponses(
-        value = [
-            ApiResponse(responseCode = "200", description = "Client added successfully"),
-            ApiResponse(responseCode = "500", description = "Error in the system")
-        ]
-    )
     fun addClient(@RequestBody client: ClientDTO)
+
 
 
     @GetMapping("clients/{username}")

@@ -14,34 +14,29 @@ data class HouseholdDAO(@Id @GeneratedValue val id: Long,
 
 @Entity
 data class MedicalHistoryDAO(@Id @GeneratedValue val id: Long, @OneToOne var client: ClientDAO?,
-                             @ManyToMany val doctors: MutableList<DoctorDAO>,
-                             @ManyToMany val appointments: MutableList<AppointmentDAO>,
-                             @ManyToMany val exams: MutableList<ExamDAO>,
-                             @ManyToMany val prescriptions: MutableList<PrescriptionDAO>)
+                             @OneToMany(mappedBy = "medicalHistory") val appointments: MutableList<AppointmentDAO>,
+                             @OneToMany(mappedBy = "medicalHistory") val exams: MutableList<ExamDAO>,
+                             @OneToMany(mappedBy = "medicalHistory") val prescriptions: MutableList<PrescriptionDAO>)
 
 @Entity
-data class DoctorDAO(@Id val username: String, val name: String, val email: String, val password: String,
-                     val phone: String, @ManyToMany val medicalHistories: MutableList<MedicalHistoryDAO>)
+data class DoctorDAO(@Id val username: String, val name: String, val email: String, val password: String, val phone: String)
 
 @Entity
 data class AppointmentDAO(@Id @GeneratedValue val id: Long, val date: LocalDate, val regime: AppointmentRegime,
                           val type: ScheduleType = ScheduleType.APPOINTMENT, var state: ScheduleState,
-                          @ManyToOne val client: ClientDAO, @ManyToOne val doctor: DoctorDAO,
-                          @ManyToOne val medicalHistoryClient: MedicalHistoryDAO,
-                          @ManyToOne val medicalHistoryDoctor: MedicalHistoryDAO)
+                          @ManyToOne val client: ClientDAO, val doctor: String,
+                          @ManyToOne val medicalHistory: MedicalHistoryDAO)
 
 @Entity
 data class ExamDAO(@Id @GeneratedValue val id: Long, val date: LocalDate, val equipment: String,
                    val type: ScheduleType = ScheduleType.EXAM, var state: ScheduleState,
-                   @ManyToOne val client: ClientDAO, @ManyToOne val doctor: DoctorDAO,
-                   @ManyToOne val medicalHistoryClient: MedicalHistoryDAO,
-                   @ManyToOne val medicalHistoryDoctor: MedicalHistoryDAO)
+                   @ManyToOne val client: ClientDAO, val doctor: String,
+                   @ManyToOne val medicalHistory: MedicalHistoryDAO)
 
 @Entity
 data class PrescriptionDAO(@Id @GeneratedValue val id: Long, val content: String,
-                           @ManyToOne val client: ClientDAO, @ManyToOne val doctor: DoctorDAO,
-                           @ManyToOne val medicalHistoryClient: MedicalHistoryDAO,
-                           @ManyToOne val medicalHistoryDoctor: MedicalHistoryDAO)
+                           @ManyToOne val client: ClientDAO, val doctor: String,
+                           @ManyToOne val medicalHistory: MedicalHistoryDAO)
 
 enum class AppointmentRegime(val type: String) {
     IN_PERSON("in person"),
