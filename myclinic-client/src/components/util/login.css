@@ -1,9 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 
 .form-container {
+    font-family: "Nunito", sans-serif;
     width: 350px;
     height: 320px;
     background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 20px 30px;
+}
+
+.create-container {
+    width: 350px;
+    height: 380px;
+    background-color: #ffffff;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-radius: 10px;
     box-sizing: border-box;
@@ -26,6 +37,7 @@
 }
 
 .form {
+    font-family: "Nunito", sans-serif;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -42,12 +54,12 @@
 }
 
 .form-btn {
-    padding: 10px 15px;
+    padding: 4% 45%;
     font-family: "Nunito", sans-serif;
     border-radius: 20px;
     border: 0 !important;
     outline: 0 !important;
-    background: #0a2b60;
+    background: #2c5288;
     color: white;
     cursor: pointer;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;

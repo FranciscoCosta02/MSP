@@ -6,11 +6,11 @@
     align-items: center;
 }
 
-.card-appoint {
+.card-appointment {
     width: 99%;
-    height: 30%;
+    height: 70%;
     background: rgb(255, 255, 255);
-    border-radius: 1em;
+    border-radius: 0.2em;
     box-shadow: 30px 30px 30px rgba(231, 231, 231, 0.22);
     display: flex;
     flex-wrap: wrap;
@@ -20,40 +20,115 @@
     margin-bottom: 2%;
 }
 
+.card-schedule {
+    width: 75%;
+    height: 70%;
+    background: rgb(242, 242, 242);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3%;
+}
+
 .inner-card {
-    width: 31%;
+    font-size: 1em;
+    width: 100%;
     height: 60%;
-    background: rgb(10, 43, 96);
-    border-radius: 10px;
+    background: rgb(44, 82, 137);
+    border-radius: 0.8em;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #ffffff;
-    padding-left: 1%;
-}
-
-.titles {
-    font-size: 1.6em;
-    font-weight: bold;
-    color: #1f1f1f;
-}
-
-.schedule {
-    font-size: 0.8em;
-    color: rgba(37, 37, 37, 0.71);
-    background-color: rgba(245, 245, 245, 0.92);
-    border-radius: 10px;
-    padding: 0.6em;
+    padding: 20%;
     cursor: pointer;
     transition: background-color 0.3s ease;
     border: none;
+}
+
+.inner-card:hover {
+    background-color: #2a4365;
+}
+
+.filters {
     display: flex;
-    justify-content: flex-end;
-    margin-left: 1em;
+    align-items: center;
+    margin-bottom: 2%;
 }
 
-.schedule:hover {
-    background-color: #0a265d;
-    color: #ffffff;
+.filters label {
+    font-size: 1.1em;
+    margin-right: 3%;
 }
 
+.filters select {
+    font-family: "Nunito", sans-serif;
+    font-size: 0.8em;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #f8f8f8;
+}
+
+.filters select:focus {
+    outline: none;
+    border-color: #4e6589;
+}
+
+.doctor-search-input {
+    font-family: "Nunito", sans-serif;
+    font-size: 0.8em;
+    width: 50%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 3%;
+}
+
+.appointment-button {
+    font-family: "Nunito", sans-serif;
+    font-size: 1.2em;
+    font-weight: bold;
+    width: 120%;
+    color: rgb(255, 255, 255);
+    background-color: rgb(44, 82, 137);
+    border: none;
+    border-radius: 4px;
+    padding: 8% 8%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.appointment-button:hover {
+    background-color: #2a4365;
+}
+
+.form-label {
+    font-family: "Nunito", sans-serif;
+    font-size: 1.1em;
+    margin-right: 3%;
+    font-weight: bold;
+}
+
+.form-input {
+    font-family: "Nunito", sans-serif;
+    font-size: 0.8em;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 3%;
+    cursor: pointer;
+}
+
+.form-input-locked {
+    font-family: "Nunito", sans-serif;
+    font-size: 0.8em;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 3%;
+    color: #747474;
+    cursor: inherit;
+
+}

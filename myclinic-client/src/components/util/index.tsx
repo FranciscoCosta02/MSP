@@ -4,6 +4,8 @@ import { store } from '../../store'
 import { deleteUser, setUser, User } from '../../store/user'
 import { Link } from 'react-router-dom'
 import './login.css';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faArrowLeft} from "@fortawesome/free-solid-svg-icons";
 //import { deleteReservations } from '../../store/reservations'
 
 export const Navigation = () => {
@@ -105,14 +107,40 @@ export const Login = () => {
             <form className={"form"}>
                 <input type="email" className={"input"} placeholder="Email"/>
                 <input type="password" className={"input"} placeholder="Password"/>
-                <button className={"form-btn"}>Enter</button>
+                <Link to="/">
+                    <button className={"form-btn"}>Enter</button>
+                </Link>
             </form>
 
             <p className={"sign-up-label"}>
-                Don't have an account?<span className={"sign-up-link"}>Create account</span>
+                Don't have an account? <Link to="/create-account" className={"sign-up-link"}>Create account</Link>
             </p>
 
         </div>
 
     return login
+}
+
+export const CreateAccount = () => {
+
+    const create =
+        <div className={"create-container"}>
+            <p className={"title"}>Create Account</p>
+            <form className={"form"}>
+                <input type="name" className={"input"} placeholder="Name"/>
+                <input type="email" className={"input"} placeholder="Email"/>
+                <input type="password" className={"input"} placeholder="Password"/>
+                <Link to="/">
+                    <button className={"form-btn"}>Enter</button>
+                </Link>
+            </form>
+
+            <p className={"sign-up-label"}>
+                Already have an account? <Link to="/login" className={"sign-up-link"}>Login</Link>
+            </p>
+
+
+        </div>
+
+    return create
 }
