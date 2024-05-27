@@ -13,5 +13,7 @@ class PrescriptionApplication(
         prescriptions.save(prescription)
     }
 
+    fun getAllClientPrescriptions(username: String): Iterable<PrescriptionDAO> =
+        prescriptions.findAllByClientUsername(username)
 
 }

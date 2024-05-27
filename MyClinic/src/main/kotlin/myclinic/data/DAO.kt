@@ -19,19 +19,20 @@ data class MedicalHistoryDAO(@Id @GeneratedValue val id: Long, @OneToOne var cli
                              @OneToMany(mappedBy = "medicalHistory") val prescriptions: MutableList<PrescriptionDAO>)
 
 @Entity
-data class DoctorDAO(@Id val username: String, val name: String, val email: String, val password: String, val phone: String)
+data class DoctorDAO(@Id val username: String, val name: String, val email: String, val password: String,
+                     val phone: String, val specialty: Speciality)
 
 @Entity
 data class AppointmentDAO(@Id @GeneratedValue val id: Long, val date: LocalDate, val regime: AppointmentRegime,
-                          val type: ScheduleType = ScheduleType.APPOINTMENT, var state: ScheduleState,
+                          val scheduleType: ScheduleType = ScheduleType.APPOINTMENT, var state: ScheduleState,
                           @ManyToOne val client: ClientDAO, val doctor: String,
-                          @ManyToOne val medicalHistory: MedicalHistoryDAO)
+                          @ManyToOne val medicalHistory: MedicalHistoryDAO, val type: Speciality)
 
 @Entity
 data class ExamDAO(@Id @GeneratedValue val id: Long, val date: LocalDate, val equipment: String,
-                   val type: ScheduleType = ScheduleType.EXAM, var state: ScheduleState,
+                   val scheduleType: ScheduleType = ScheduleType.EXAM, var state: ScheduleState,
                    @ManyToOne val client: ClientDAO, val doctor: String,
-                   @ManyToOne val medicalHistory: MedicalHistoryDAO)
+                   @ManyToOne val medicalHistory: MedicalHistoryDAO, val type: Speciality)
 
 @Entity
 data class PrescriptionDAO(@Id @GeneratedValue val id: Long, val content: String,
@@ -52,4 +53,17 @@ enum class ScheduleState(val state: String) {
 enum class ScheduleType(val type: String) {
     APPOINTMENT("appointment"),
     EXAM("exam")
+}
+
+enum class Speciality(val type: String) {
+    GEN_FAM("general practice family medicine"),
+    PEDI("pediatrics"),
+    GYNE_OBST("gynecology obstetrics"),
+    CARDIO("cardiology"),
+    ORTHO("orthopedics"),
+    DERMA("dermatology"),
+    PSYCH("psychiatry"),
+    OPHTHAL("ophthalmology"),
+    ENT("otolaryngologies"),
+    GASTRO("gastroenterology")
 }

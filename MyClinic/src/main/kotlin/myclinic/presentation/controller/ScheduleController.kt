@@ -40,8 +40,8 @@ class ScheduleController(
         doctorsApp.getDoctor(appointment.doctorUsername)
             .orElseThrow { NotFoundException(Constants.DOCTOR_NOT_FOUND.message) }
 
-        val appointmentDAO = AppointmentDAO(0, appointment.date, appointment.regime, appointment.type,
-            ScheduleState.SCHEDULED, client, appointment.doctorUsername, medicalHistoryClient)
+        val appointmentDAO = AppointmentDAO(0, appointment.date, appointment.regime, appointment.scheduleType,
+            ScheduleState.SCHEDULED, client, appointment.doctorUsername, medicalHistoryClient, appointment.type)
         medicalHistoryClient.appointments.add(appointmentDAO)
     }
 
@@ -53,8 +53,8 @@ class ScheduleController(
         doctorsApp.getDoctor(exam.doctorUsername)
             .orElseThrow { NotFoundException(Constants.DOCTOR_NOT_FOUND.message) }
 
-        val examDAO = ExamDAO(0, exam.date, exam.equipment, exam.type, ScheduleState.SCHEDULED,
-            client, exam.doctorUsername, medicalHistoryClient)
+        val examDAO = ExamDAO(0, exam.date, exam.equipment, exam.scheduleType, ScheduleState.SCHEDULED,
+            client, exam.doctorUsername, medicalHistoryClient, exam.type)
         medicalHistoryClient.exams.add(examDAO)
     }
 

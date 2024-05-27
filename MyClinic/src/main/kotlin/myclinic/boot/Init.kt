@@ -11,7 +11,9 @@ import java.time.LocalDate
 class Init (val clients: ClientRepository, val doctors: DoctorRepository,
             val medicalHistories: MedicalHistoryRepository, val households: HouseholdRepository,
             val appointments: AppointmentRepository, val exams: ExamRepository,
-            val prescriptions: PrescriptionRepository): CommandLineRunner {
+            val prescriptions: PrescriptionRepository): CommandLineRunner
+{
+
     override fun run(vararg args: String?) {
 
         /**
@@ -38,32 +40,53 @@ class Init (val clients: ClientRepository, val doctors: DoctorRepository,
         /**
          * Doctor
          */
-
-        val doctor = DoctorDAO("kiko", "Francisco Costa", "kiko@gmail.com", "pass", "921394024")
-        doctors.save(doctor)
+        val doctor1 = DoctorDAO("kiko", "Francisco", "kiko@gmail.com", "pass", "921394024", Speciality.CARDIO)
+        val doctor2 = DoctorDAO("rita", "Rita", "rita@gmail.com", "pass", "921394024", Speciality.ENT)
+        val doctor3 = DoctorDAO("fred", "Frederico", "frederico@gmail.com", "pass", "921394024", Speciality.CARDIO)
+        val doctor4 = DoctorDAO("pedro", "Pedro", "pedro@gmail.com", "pass", "921394024", Speciality.ORTHO)
+        val doctor5 = DoctorDAO("joao", "João", "pedro@gmail.com", "pass", "921394024", Speciality.ORTHO)
+        doctors.saveAll(listOf(doctor1, doctor2, doctor3, doctor4, doctor5))
 
         /**
          * Appointment
          */
-        val appointment = AppointmentDAO(0, LocalDate.now(), AppointmentRegime.IN_PERSON, ScheduleType.APPOINTMENT,
-            ScheduleState.SCHEDULED, client, doctor.username, client.medicalHistory)
-        appointments.save(appointment)
+        val appointment1 = AppointmentDAO(0, LocalDate.now(), AppointmentRegime.IN_PERSON, ScheduleType.APPOINTMENT,
+            ScheduleState.SCHEDULED, client, doctor1.username, client.medicalHistory, doctor1.specialty)
+        val appointment2 = AppointmentDAO(0, LocalDate.now(), AppointmentRegime.ONLINE, ScheduleType.EXAM,
+            ScheduleState.SCHEDULED, client, doctor2.username, client.medicalHistory, doctor2.specialty)
+        val appointment3 = AppointmentDAO(0, LocalDate.now(), AppointmentRegime.IN_PERSON, ScheduleType.APPOINTMENT,
+            ScheduleState.SCHEDULED, client, doctor3.username, client.medicalHistory, doctor3.specialty)
 
-        medicalHistoryClient.appointments.add(appointment)
+        val appointmentList = listOf(appointment1, appointment2, appointment3)
+        appointments.saveAll(appointmentList)
+        medicalHistoryClient.appointments.addAll(appointmentList)
         medicalHistories.save(medicalHistoryClient)
 
         /**
          * Exam
          */
-        val exam = ExamDAO(0, LocalDate.now(), "treadmill, more machines", ScheduleType.EXAM, ScheduleState.SCHEDULED,
-            client, doctor.username, medicalHistoryClient)
-        exams.save(exam)
+        val exam1 = ExamDAO(0, LocalDate.now(), "treadmill, more machines", ScheduleType.EXAM, ScheduleState.SCHEDULED,
+            client, doctor4.username, medicalHistoryClient, doctor4.specialty)
+        val exam2 = ExamDAO(0, LocalDate.now(), "a couple machines", ScheduleType.EXAM, ScheduleState.SCHEDULED,
+            client, doctor5.username, medicalHistoryClient, doctor5.specialty)
 
-        medicalHistoryClient.exams.add(exam)
+        val examList = listOf(exam1, exam2)
+        exams.saveAll(examList)
+        medicalHistoryClient.exams.addAll(examList)
         medicalHistories.save(medicalHistoryClient)
 
+        /**
+         * Prescriptions
+         */
+        val prescription1 = PrescriptionDAO(0, "some medication info", client, doctor1.username,
+            medicalHistoryClient)
+        val prescription2 = PrescriptionDAO(0, "some more info", client, doctor5.username,
+            medicalHistoryClient)
 
-
+        val prescriptionList = listOf(prescription1, prescription2)
+        prescriptions.saveAll(prescriptionList)
+        medicalHistoryClient.prescriptions.addAll(prescriptionList)
+        medicalHistories.save(medicalHistoryClient)
 
     }
 

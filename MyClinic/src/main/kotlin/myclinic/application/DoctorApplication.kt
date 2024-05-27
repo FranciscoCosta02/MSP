@@ -17,4 +17,7 @@ class DoctorApplication(
     fun getDoctor(username: String): Optional<DoctorDAO> =
         doctors.findByUsername(username)
 
+    fun getDoctors(): Iterable<DoctorDAO> =
+        doctors.findAll()
+
 }
