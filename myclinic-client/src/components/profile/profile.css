@@ -145,7 +145,24 @@
     background-color: #2a4365;
 }
 
+.household-row {
+    display: flex;
+    width: 100%; /* Garante que ocupe toda a linha */
+    margin-bottom: 10px;
+}
 
+.card-household {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    flex: 1; /* Cada cartão ocupa a largura total disponível */
+    text-align: center;
+}
+
+.card-household:hover {
+    background-color: rgb(208, 208, 208);
+    transition-duration: .5s;
+}
 
 
 

@@ -1,5 +1,5 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faArrowLeft, faSignOutAlt, faStethoscope} from "@fortawesome/free-solid-svg-icons";
+import {faArrowLeft, faSignOutAlt} from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 import './profile.css';
 import avatar from "./avatar.png";
@@ -33,6 +33,14 @@ export const ProfileCard = (patient: { name: string | number | boolean | React.R
     )
 }
 
+// @ts-ignore
+const HouseholdPersonCard = ({ name, birthDate }) => (
+    <div className="card-household">
+        <p className={"page-sub-title"}>{name}</p>
+        <p className={"page-text-info"}>{birthDate}</p>
+    </div>
+);
+
 export const LogoutButton = () => {
     const navigate = useNavigate();
 
@@ -45,51 +53,18 @@ export const LogoutButton = () => {
     );
 }
 
-/*
-const PrescriptionsTable = ({ prescriptions }) => {
-    return (
-        <table>
-            <thead>
-            <tr>
-                <th>Date</th>
-                <th>Doctor</th>
-                <th>Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            {prescriptions.map((prescription, index) => (
-                <tr key={index}>
-                    <td>{prescription.date}</td>
-                    <td>{prescription.doctor}</td>
-                    <td>
-                        <button onClick={() => handleOpenPrescription(prescription)}>
-                            Open
-                        </button>
-                    </td>
-                </tr>
-            ))}
-            </tbody>
-        </table>
-    );
-};
-const handleOpenPrescription = (prescription) => {
-  // Implement the logic to open the prescription
-  console.log('Opening prescription:', prescription);
-};
-
-*/
-
 const PrescriptionsTable = () => {
     const examplePrescriptions = [
-        { date: '2024-04-01', doctor: 'Dr. Smith' },
-        { date: '2024-04-05', doctor: 'Dr. Johnson' },
-        { date: '2024-04-10', doctor: 'Dr. Brown' },
-        { date: '2024-04-15', doctor: 'Dr. Patel' },
-    ];
+        { date: '2024-04-01', doctor: 'Dr. Smith', content: '/data/prescription1.pdf' },
+        { date: '2024-04-05', doctor: 'Dr. Johnson', content: '/data/prescription1.pdf' },
+        { date: '2024-04-10', doctor: 'Dr. Brown', content: '/data/prescription1.pdf' },
+        { date: '2024-04-15', doctor: 'Dr. Patel', content: '/data/prescription1.pdf' },
+    ]
 
-    const handleOpenPrescription = () => {
+    const handleOpenPrescription = (content: string | URL | undefined) => {
+        window.open(content, '_blank');
+    }
 
-    };
 
     return (
         <table className="prescriptions-table">
@@ -106,7 +81,7 @@ const PrescriptionsTable = () => {
                     <td>{prescription.date}</td>
                     <td>{prescription.doctor}</td>
                     <td>
-                        <button className="open-button" onClick={() => handleOpenPrescription()}>
+                        <button className="open-button" onClick={() => handleOpenPrescription(prescription.content)}>
                             Open prescription
                         </button>
                     </td>
@@ -114,8 +89,8 @@ const PrescriptionsTable = () => {
             ))}
             </tbody>
         </table>
-    );
-};
+    )
+}
 
 export default PrescriptionsTable;
 
@@ -157,9 +132,13 @@ export const Profile = () => {
                     </div>
 
                     <p className={"page-sub-title"}>Medical History</p>
-                    <button className={"simple-button"}>See medical history</button>
+                    <Link to="/profile/medical-history">
+                            <button className={"simple-button"}>See medical history</button>
+                    </Link>
                     <p className={"page-sub-title"}>Household</p>
-                    <button className={"simple-button"}>See household</button>
+                    <Link to="/profile/household">
+                        <button className={"simple-button"}>See household</button>
+                    </Link>
                     <p></p>
                     <Link to="/">
                         <button className={"light-button"}><FontAwesomeIcon icon={faArrowLeft} /> Back</button>
@@ -169,4 +148,156 @@ export const Profile = () => {
         </div>
 
     return profile
+}
+
+export const MedicalHistory = () => {
+    const exampleAppointments = [
+        { date: '2024-04-17', regime: 'in person', type: 'appointment', state: 'completed', doctor: 'Dr. Smith' },
+        { date: '2024-04-20', regime: 'online', type: 'appointment', state: 'completed', doctor: 'Dr. Johnson' },
+        { date: '2024-05-10', regime: 'in person', type: 'appointment', state: 'completed', doctor: 'Dr. Brown' },
+        { date: '2024-05-15', regime: 'online', type: 'appointment', state: 'completed', doctor: 'Dr. Patel' },
+    ]
+
+    const exampleExams = [
+        { date: '2024-04-17', regime: 'in person', type: 'exam', state: 'completed', doctor: 'Dr. Smith' },
+        { date: '2024-04-20', regime: 'online', type: 'exam', state: 'completed', doctor: 'Dr. Johnson' },
+        { date: '2024-05-10', regime: 'in person', type: 'exam', state: 'completed', doctor: 'Dr. Brown' },
+        { date: '2024-05-15', regime: 'online', type: 'exam', state: 'completed', doctor: 'Dr. Patel' },
+    ]
+
+    const handleOpenExam = () => {
+
+    }
+
+    const patient = {name: 'Pepper Potts', email: 'teste@mail.com', birthDate: '20/12/2001', phone: '999999999', nif: '111111111'}
+
+    return (
+        <div className={"profile-page"}>
+            <div className={"left"}>
+                <MyClinicHeader />
+                <ProfileCard name={patient.name} />
+            </div>
+
+            <div className={"right"}>
+                <div>
+                    <div className={"page-title"}>
+                        <p>Medical History</p>
+                    </div>
+                    <p className={"page-sub-title"}>Prescriptions</p>
+                    <PrescriptionsTable/>
+                    <p className={"page-sub-title"}>Appointments</p>
+                    <table className="prescriptions-table">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Regime</th>
+                            <th>Type</th>
+                            <th>State</th>
+                            <th>Doctor</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {exampleAppointments.map((appointment, index) => (
+                            <tr key={index}>
+                                <td>{appointment.date}</td>
+                                <td>{appointment.regime}</td>
+                                <td>{appointment.type}</td>
+                                <td>{appointment.state}</td>
+                                <td>{appointment.doctor}</td>
+                                <td>
+                                    <Link to="/appointments/appointment-id">
+                                        <button className="open-button">
+                                            Open appointment
+                                        </button>
+                                    </Link>
+                                </td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
+                    <p className={"page-sub-title"}>Exams</p>
+                    <table className="prescriptions-table">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Regime</th>
+                            <th>Type</th>
+                            <th>State</th>
+                            <th>Doctor</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {exampleExams.map((appointment, index) => (
+                            <tr key={index}>
+                                <td>{appointment.date}</td>
+                                <td>{appointment.regime}</td>
+                                <td>{appointment.type}</td>
+                                <td>{appointment.state}</td>
+                                <td>{appointment.doctor}</td>
+                                <td>
+                                    <Link to="/appointments/appointment-id">
+                                        <button className="open-button">
+                                            Open appointment
+                                        </button>
+                                    </Link>
+                                </td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
+                    <Link to="/profile">
+                        <button className={"light-button"}><FontAwesomeIcon icon={faArrowLeft} /> Back</button>
+                    </Link>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export const Household = () => {
+
+    const patient = {
+        name: 'Pepper Potts',
+        email: 'teste@mail.com',
+        birthDate: '20/12/2001',
+        phone: '999999999',
+        nif: '111111111',
+        household: [
+            { name: 'Tony Potts', birthDate: '12/09/1967' },
+            { name: 'Morgan Potts', birthDate: '25/03/1999' },
+            { name: 'Happy Potts', birthDate: '21/08/2002' },
+            { name: 'James Potts', birthDate: '14/01/1972' }
+        ]
+    }
+
+    const renderHouseholdCards = () => {
+        return patient.household.map((person, index) => (
+            <div className="household-row" key={index}>
+                <HouseholdPersonCard name={person.name} birthDate={person.birthDate} />
+            </div>
+        ));
+    };
+
+    return (
+        <div className={"profile-page"}>
+            <div className={"left"}>
+                <MyClinicHeader />
+                <ProfileCard name={patient.name} />
+            </div>
+
+            <div className={"right"}>
+                <div>
+                    <div className={"page-title"}>
+                        <p>Household</p>
+                    </div>
+                    {renderHouseholdCards()}
+                    <Link to="/profile">
+                        <button className={"light-button"}><FontAwesomeIcon icon={faArrowLeft} /> Back</button>
+                    </Link>
+                </div>
+            </div>
+        </div>
+    )
 }

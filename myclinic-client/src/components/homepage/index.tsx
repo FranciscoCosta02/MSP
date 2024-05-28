@@ -3,6 +3,7 @@ import {faStethoscope} from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 import {Appointments, UpcomingAppointments} from "../appointments";
 import {ProfileCard} from "../profile";
+import {ClinicalStaff} from "../clinical-staff";
 
 export const MyClinicHeader = () => {
     return (
@@ -35,6 +36,10 @@ export const Homepage = () => {
                     <p className={"titles"}>Appointments</p>
                     <Appointments/>
                 </div>
+            </div>
+            <div>
+                <p className={"titles"}>Clinical Staff</p>
+                <ClinicalStaff/>
             </div>
         </div>
     </div>
