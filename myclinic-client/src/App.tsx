@@ -9,6 +9,7 @@ import {store} from "./store";
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import {Household, MedicalHistory, Profile} from "./components/profile";
 import {AppointmentPage, AppointmentsPage, FormAppointmentPage} from "./components/appointments";
+import {ClinicalStaffPage} from "./components/clinical-staff";
 
 function HomepageApp() {
 
@@ -45,6 +46,15 @@ function MedicalHistoryApp() {
     return (
         <div>
             <div><MedicalHistory/></div>
+            <div><Footer/></div>
+        </div>
+    )
+}
+
+function RecommendedApp() {
+    return (
+        <div>
+            <div><ClinicalStaffPage/></div>
             <div><Footer/></div>
         </div>
     )
@@ -107,6 +117,7 @@ const RdxApp = () => (
                 <Route path='/profile' element={<ProfileApp />} />
                 <Route path='/profile/household' element={<HouseholdApp />} />
                 <Route path='/profile/medical-history' element={<MedicalHistoryApp />} />
+                <Route path='/profile/medical-history/recomended-doctors' element={<RecommendedApp />} />
                 <Route path='/appointments' element={<AppointmentsApp />} />
                 <Route path='/appointments/appointment-id' element={<AppointmentApp />} />
                 <Route path='/appointments/schedule' element={<ScheduleApp />} />

@@ -247,6 +247,11 @@ export const MedicalHistory = () => {
                         ))}
                         </tbody>
                     </table>
+                    <p></p>
+                    <Link to="/profile/medical-history/recomended-doctors">
+                        <button className={"simple-button"}>Recommend doctors</button>
+                    </Link>
+                    <p></p>
                     <Link to="/profile">
                         <button className={"light-button"}><FontAwesomeIcon icon={faArrowLeft} /> Back</button>
                     </Link>
@@ -293,6 +298,10 @@ export const Household = () => {
                         <p>Household</p>
                     </div>
                     {renderHouseholdCards()}
+                    <button className={"simple-button"}>Add member</button>
+                    <p></p>
+                    <button className={"simple-button"}>Edit household</button>
+                    <p></p>
                     <Link to="/profile">
                         <button className={"light-button"}><FontAwesomeIcon icon={faArrowLeft} /> Back</button>
                     </Link>

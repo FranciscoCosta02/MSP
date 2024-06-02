@@ -1,5 +1,9 @@
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
+import {MyClinicHeader} from "../homepage";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faArrowLeft} from "@fortawesome/free-solid-svg-icons";
+import PrescriptionsTable, {ProfileCard} from "../profile";
 
 export const ClinicalStaff = () => {
 
@@ -76,7 +80,7 @@ export const ClinicalStaff = () => {
                         <td>{staff.medicalSpeciality}</td>
                         <td>{staff.email}</td>
                         <td>
-                            <Link to="/appointments/appointment-id">
+                            <Link to="/appointments/schedule">
                                 <button className="open-button">
                                     Make appointment
                                 </button>
@@ -89,4 +93,60 @@ export const ClinicalStaff = () => {
         </div>
 
     return clinicalStaff
+}
+
+export const ClinicalStaffPage = () => {
+
+const patient = {name: 'Pepper Potts', email: 'teste@mail.com', birthDate: '20/12/2001', phone: '999999999', nif: '111111111'}
+
+    const exampleStaff = [
+        { medicalSpeciality: 'cardiology', name: 'Dr. Smith', email: 'smith@mail.com' },
+        { medicalSpeciality: 'gynecology obstetrics', name: 'Dr. Patel', email: 'patel@mail.com' },
+    ]
+
+return (
+    <div className={"profile-page"}>
+        <div className={"left"}>
+            <MyClinicHeader />
+            <ProfileCard name={patient.name} />
+        </div>
+
+        <div className={"right"}>
+            <div>
+                <div className={"page-title"}>
+                    <p>Recommended doctors</p>
+                </div>
+                    <table className="prescriptions-table">
+                        <thead>
+                        <tr>
+                            <th>Doctor</th>
+                            <th>Speciality</th>
+                            <th>Email</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {exampleStaff.map((staff, index) => (
+                            <tr key={index}>
+                                <td>{staff.name}</td>
+                                <td>{staff.medicalSpeciality}</td>
+                                <td>{staff.email}</td>
+                                <td>
+                                    <Link to="/appointments/schedule">
+                                        <button className="open-button">
+                                            Make appointment
+                                        </button>
+                                    </Link>
+                                </td>
+                            </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+                <Link to="/profile">
+                    <button className={"light-button"}><FontAwesomeIcon icon={faArrowLeft} /> Back</button>
+                </Link>
+            </div>
+        </div>
+)
 }
